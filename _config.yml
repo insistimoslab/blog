@@ -23,7 +23,7 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "selfportrait.jpg"
   name             : "InsistimosLab"
   pronouns         : # example: "she/her"  
   bio              : "está aburrido del contenido que el algoritmo distribuye en internet. Busca compartir su visión y su labor por las cosas que todavía le interesan."
@@ -45,27 +45,26 @@ author:
   researchgate     : # URL
   scopus           : # URL
   zotero           : # URL
-  instagram        : https://www.instagram.com/insistimoslab/
 
 
   # Repositories and software development
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "academicpages"
+  github           : "insistimoslab"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
   # Social media
   artstation       : # Username
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
+  bluesky          : #"bsky.app" # Replace this with you Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
   goodreads        : # Username
   google_plus      : # Username
   keybase          : # Username
-  instagram        : # Username
+  instagram        : "@insistimoslab"
   lastfm           : # Username
   linkedin         : # Username
   mastodon         : # URL
