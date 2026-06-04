@@ -11,16 +11,16 @@ main:
   - title: "Artículos"
     url: /articles/
 
-  - title: "Talks"
-    url: /talks/    
+  #- title: "Talks"
+  #  url: /talks/    
 
-  - title: "Teaching"
-    url: /teaching/    
+  #- title: "Teaching"
+  #  url: /teaching/    
     
   #- title: "Portfolio"
   #  url: /portfolio/
         
-  - title: "Blog Posts"
+  - title: "Blog Notes"
     url: /year-archive/
     
   - title: "CV"
