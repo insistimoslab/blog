@@ -11,7 +11,7 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Electronics, 2022.
+* Ph.D in Electronics
 
 Work experience
 ======
