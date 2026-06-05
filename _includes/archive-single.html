@@ -53,10 +53,10 @@
     {% endif %}
     
     {% if post.excerpt %}
-    <p class="archive__item-excerpt" itemprop="description">
-    {{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}
-    </p>
-    {% endif %}
+  <div class="archive__item-excerpt">
+    {{ post.excerpt | strip_html }}
+  </div>
+{% endif %}
 
 
   </article>
