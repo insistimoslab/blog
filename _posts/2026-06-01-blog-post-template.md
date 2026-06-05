@@ -1,7 +1,7 @@
 ---
 title: 'Blog Post number 1'
 date: 2026-06-01
-permalink: /posts/2026/086/blog-post-1/
+permalink: /posts/2026/06/blog-post-1/
 tags:
   - cool posts
   - category1
