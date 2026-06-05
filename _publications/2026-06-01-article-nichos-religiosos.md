@@ -1,8 +1,7 @@
 ---
 title: "Catálogo de nichos religiosos en la ciudad de Puebla"
 collection: publications
-category: 
-    -other
+category: photography
 permalink: /publication/2016-06-01-nichos-religiosos
 excerpt: 'En este artículo presento un catálogo de los nichos religiosos encontrados en el centro histórico de la ciudad de Puebla'
 date: 2026-06-04
