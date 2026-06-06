@@ -1,5 +1,5 @@
 ---
-title: 'Instrucciones breves para hostear página en GitHub Pages (DRAFT)'
+title: 'Instrucciones breves para hostear página en GitHub Pages'
 date: 2026-06-05
 permalink: /posts/2026/06/instrucciones-github-pages/
 tags:
@@ -7,82 +7,260 @@ tags:
 published: true
 ---
 
-Describo aquí muy resumidamente los pasos a seguir para hostear una página en Github Pages. Estos son los mismos pasos que seguí para hostear este blog. 
 
-1. Descargar Git Bash para windows. 
-2. Descargar Ruby para windows. (en mi caso funcionó con Ruby 3.2.10, Jekyll 3.10.0, Bundle 2.7.2)
-3. Iniciar sesión en Github. Buscar un template y hacer fork. (yo utilicé academicpages)
-4. Crear carpeta en local para clonar repositorio.
-  > git clone repository_link
-5. Creación del SSH key:
-  > git --version
-  > ls ~/.ssh
-  > ssh-keygen -t ed25519 -f ~/.ssh/id_ed15519_USER -C "USER@email.com"
-    (esto crea una ssh-key para el usuario USER, es util si se manejan varias cuentas de github, por ejemplo una personal y una profesional)
-    (no es necesario usar passphrase)
-6. Crear archivo config con las cuentas (no es necesario si solo se maneja una cuenta), el contenido del archivo es el siguiente:
-    Host github-USER
-          HostName github.com
-          User git
-          Identity File ~/.ssh/id_ed25519_USER  
-7. Agregar SSH-KEY a la cuenta de GitHub: En profile/settings/SSH and GDP keys. Copiar el contenido del archivo id_25519_USER.pub
-8. Cambiar repositorios para usar host correcto y probar conexión.
-  Ir a la capeta del repositorio y verificar remote:
-  > git remote -v
-  (debe devolcer algo similar a "origin git@github.com USER/MY_REPO.git") (fetch y push)
+# Cómo hostear un blog en GitHub Pages
 
-  Usamos el archivo confir para direccionar los alias:
-  > git remote set-url origin git@github-USER:USER/MY_REPO.git
-  #git remote set-url origin git@github-INSISTIMOSLAB:insistimoslab/blog
+Describo aquí, de forma resumida, los pasos que seguí para hostear este blog utilizando GitHub Pages y una plantilla de Jekyll.
 
-  Luego corremos el agente (esto debe correrse cada vez que se inicie la sesion por Git Bash, a menos que se automatice):
-  > eval "$(ssh-agent -s)"
+## Instalación inicial
 
-  Luego cargamos claves:
-  > ssh-add ~/.ssh/id_ed25519_USER
+1. Descargar **Git Bash** para Windows.
+2. Descargar **Ruby** para Windows.
+   - En mi caso funcionó con:
+     - Ruby 3.2.10
+     - Jekyll 3.10.0
+     - Bundler 2.7.2
+3. Iniciar sesión en GitHub.
+4. Buscar una plantilla y hacer un fork.
+   - En mi caso utilicé **Academic Pages**.
+5. Crear una carpeta local donde se clonará el repositorio.
 
-  Verificamos que cargaron:
-  > ssh-add -l
+```bash
+git clone REPOSITORY_LINK
+```
 
-  Probamos conexión:
-  > ssh -T git@github-USER
-  (debe devolcer "Hi USER! You have been succesfully authenticated...")
+## Configuración de SSH
 
+### Crear una clave SSH
 
-PARA HOSTEAR
-======
+Verificar la instalación de Git:
 
-1. Instalar Visual Studio Code y abrir el folder del proyecto.
-2. Ir a Github/Settings del repositorio/Pages y seleccionar "Deploy from a branch" (elegir branch "master"). Esperar unos minutos a que se haga el deploy y recargar la página:
-3. En el folder del proyecto, buscar el archivo config.yaml y copiar la URL del sitio (la que nos proporciona GitHub después del deploy). Cambiamos URL por la del sitio y Base URL por la del repositorio.
-4. Configuramos identidad: agregamos email y nombreÑ
-  > git config user.email "USER@email.com"
-  > git config user.name "USER"
-5. Guardar cambios con commit:
-  > git status
-  > git add .
-  > git commit -m "mensaje del commit"
-  > git push origin master
+```bash
+git --version
+```
 
+Verificar si existen claves SSH:
 
-FLUJO PARA HACER CAMBIOS AL BLOG
-======
-1. Para iniciar, abrir Git Bash e ir al floder del proyecto en la terminal.
-  > git remote -v
-  > eval "$(ssh-agent -s)"
-  > ssh-add ~/.ssh/id_ed25519_USER
-  > ssh-add -l
-  > git status
-  > git pull
+```bash
+ls ~/.ssh
+```
 
-  Si se desea lanzar en local:
-  > bundle exec jekyll serve
+Crear una nueva clave SSH:
 
-4. Para hacer cambios. Despues de los cambios realizados en los archivos correspondientes del proyecto:
-  > git status
-  > git add .
-  > git commit -m "mensaje"
-  > git branch
-  > git remote -v
-  > git push origin master
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_USER -C "USER@email.com"
+```
+
+Esto crea una clave SSH para el usuario `USER`. Es especialmente útil si se manejan varias cuentas de GitHub (por ejemplo, una personal y una profesional).
+
+No es necesario utilizar passphrase.
+
+### Crear archivo de configuración SSH
+
+Si se utiliza una sola cuenta de GitHub, este paso es opcional.
+
+Crear o editar el archivo:
+
+```text
+~/.ssh/config
+```
+
+Contenido:
+
+```text
+Host github-USER
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_USER
+```
+
+### Agregar la clave SSH a GitHub
+
+Ir a:
+
+```text
+Profile → Settings → SSH and GPG Keys
+```
+
+Copiar el contenido del archivo:
+
+```text
+id_ed25519_USER.pub
+```
+
+y agregar una nueva clave SSH.
+
+### Configurar el repositorio para usar la clave correcta
+
+Ir a la carpeta del repositorio y verificar el remote:
+
+```bash
+git remote -v
+```
+
+Debería mostrar algo similar a:
+
+```text
+origin git@github.com:USER/MY_REPO.git (fetch)
+origin git@github.com:USER/MY_REPO.git (push)
+```
+
+Actualizar el remote para utilizar el alias definido en el archivo `config`:
+
+```bash
+git remote set-url origin git@github-USER:USER/MY_REPO.git
+```
+
+Ejemplo:
+
+```bash
+git remote set-url origin git@github-INSISTIMOSLAB:insistimoslab/blog.git
+```
+
+### Iniciar el agente SSH
+
+Este comando debe ejecutarse cada vez que se inicia una sesión de Git Bash, a menos que se automatice.
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+Agregar la clave:
+
+```bash
+ssh-add ~/.ssh/id_ed25519_USER
+```
+
+Verificar que fue cargada:
+
+```bash
+ssh-add -l
+```
+
+Probar la conexión:
+
+```bash
+ssh -T git@github-USER
+```
+
+Debería aparecer un mensaje similar a:
+
+```text
+Hi USER! You've successfully authenticated...
+```
+
+## Publicar el sitio
+
+1. Abrir la carpeta del proyecto en Visual Studio Code.
+
+2. Ir a:
+
+```text
+GitHub → Settings → Pages
+```
+
+3. Seleccionar:
+
+```text
+Deploy from a branch
+```
+
+y elegir la rama:
+
+```text
+master
+```
+
+Esperar unos minutos y recargar la página.
+
+4. Abrir el archivo:
+
+```text
+_config.yml
+```
+
+Actualizar los campos:
+
+```yaml
+url: https://USER.github.io
+baseurl: /NOMBRE_REPOSITORIO
+```
+
+donde:
+
+- `url` es la URL del sitio.
+- `baseurl` es el nombre del repositorio.
+
+5. Configurar la identidad de Git:
+
+```bash
+git config user.email "USER@email.com"
+git config user.name "USER"
+```
+
+6. Guardar y subir cambios:
+
+```bash
+git status
+git add .
+git commit -m "Mensaje del commit"
+git push origin master
+```
+
+## Flujo de trabajo para modificar el blog
+
+### Iniciar sesión de trabajo
+
+Abrir Git Bash y navegar a la carpeta del proyecto.
+
+Verificar la configuración:
+
+```bash
+git remote -v
+```
+
+Iniciar el agente SSH:
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+Cargar la clave:
+
+```bash
+ssh-add ~/.ssh/id_ed25519_USER
+```
+
+Verificar:
+
+```bash
+ssh-add -l
+```
+
+Actualizar el repositorio:
+
+```bash
+git status
+git pull
+```
+
+### Ejecutar el sitio localmente
+
+```bash
+bundle exec jekyll serve
+```
+
+### Guardar y publicar cambios
+
+Después de modificar los archivos:
+
+```bash
+git status
+git add .
+git commit -m "Mensaje"
+git branch
+git remote -v
+git push origin master
+```
+
 
