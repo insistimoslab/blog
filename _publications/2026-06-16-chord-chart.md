@@ -1,8 +1,7 @@
 ---
 title: "Chords Chart"
 collection: publications
-category:
-    -music
+category: music
 permalink: /publication/2026-06-16-chords-chart
 excerpt: 'Se presenta una colección de diagramas de acordes para guitarra'
 date: 2026-06-16
